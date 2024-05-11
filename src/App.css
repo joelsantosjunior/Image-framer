@@ -21,4 +21,24 @@
   p {
     @apply text-lg font-medium text-gray-900;
   }
+
+  .page {
+    @apply flex flex-col items-center justify-start;
+    @apply min-h-screen;
+    @apply min-w-full;
+    @apply bg-gray-50;
+  }
+
+  .page.uploader {
+    background-image: url('./assets/background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: overlay;
+  }
+
+  .page > h1 {
+    @apply font-display text-5xl text-center;
+    @apply bg-gradient-to-br from-blue-600 to-blue-400;
+    @apply bg-clip-text text-transparent;
+  }
 }
