@@ -13,22 +13,22 @@ interface Frame {
 const FrameSelectionPage = () => {
   const frames: Frame[] = [
     {
-      src: 'src/assets/frames/festa-junina.png',
+      src: 'assets/frames/festa-junina.png',
       name: 'Frame 1',
       bg: 'bg-gray-500',
     },
     {
-      src: 'src/assets/frames/dia-das-maes.png',
+      src: 'assets/frames/dia-das-maes.png',
       name: 'Frame 2',
       bg: 'bg-gray-500',
     },
     {
-      src: 'src/assets/frames/dia-das-maes.png',
+      src: 'assets/frames/dia-das-maes.png',
       name: 'Frame 3',
       bg: 'bg-gray-500',
     },
     {
-      src: 'src/assets/frames/dia-das-maes.png',
+      src: 'assets/frames/dia-das-maes.png',
       name: 'Frame 4',
       bg: 'bg-gray-500',
     },
