@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import UploadPage from './pages/Upload'
-import ImageView from './pages/ImageView'
+import UploadPage from './pages/UploadPage'
+import ImageView from './pages/ImageViewPage'
 import { ImageContext } from './ImageContext'
 import { useState } from 'react'
 
@@ -18,8 +18,8 @@ function App() {
     <BrowserRouter>
       <ImageContext.Provider value={imageState}>
         <Routes>
-          <Route path="/" Component={UploadPage}></Route>
-          <Route path="/view" Component={ImageView}></Route>
+          <Route path="/" element={<UploadPage />}></Route>
+          <Route path="/view" element={<ImageView />}></Route>
           <Route path="/frame"></Route>
           <Route path="/download"></Route>
         </Routes>
