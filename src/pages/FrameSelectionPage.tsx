@@ -14,22 +14,12 @@ const FrameSelectionPage = () => {
   const frames: Frame[] = [
     {
       src: 'assets/frames/festa-junina.png',
-      name: 'Frame 1',
+      name: 'Festa Junina',
       bg: 'bg-gray-500',
     },
     {
       src: 'assets/frames/dia-das-maes.png',
-      name: 'Frame 2',
-      bg: 'bg-gray-500',
-    },
-    {
-      src: 'assets/frames/dia-das-maes.png',
-      name: 'Frame 3',
-      bg: 'bg-gray-500',
-    },
-    {
-      src: 'assets/frames/dia-das-maes.png',
-      name: 'Frame 4',
+      name: 'Dia das Mães',
       bg: 'bg-gray-500',
     },
   ]

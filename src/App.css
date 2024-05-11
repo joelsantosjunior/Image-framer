@@ -23,7 +23,7 @@
   }
 
   .page {
-    background-image: url('./assets/background.jpeg');
+    background-image: url('assets/background.jpeg');
     background-position: center;
     background-size: cover;
     background-blend-mode: overlay;
