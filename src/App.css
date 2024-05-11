@@ -31,10 +31,10 @@
 
   .page {
     @apply flex flex-col items-center justify-start;
-    @apply min-h-screen;
     @apply bg-gray-50;
     @apply px-10;
 
+    min-height: calc(100vh - 100px);
     max-width: min(600px, 100%);
     margin: auto;
   }

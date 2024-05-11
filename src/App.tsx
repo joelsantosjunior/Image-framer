@@ -5,6 +5,7 @@ import ImageView from './pages/ImageViewPage'
 import { ImageContext } from './ImageContext'
 import { useState } from 'react'
 import FrameSelectionPage from './pages/FrameSelectionPage'
+import Footer from './components/Footer'
 
 function App() {
   const value = {
@@ -33,6 +34,12 @@ function App() {
           <Route path="/frame" element={<FrameSelectionPage />}></Route>
           <Route path="/download"></Route>
         </Routes>
+        <Footer>
+          Feito com 💚 + 🍕 por{' '}
+          <a href="https://joelsantos.dev" target="_blank">
+            Joel Santos
+          </a>
+        </Footer>
       </ImageContext.Provider>
     </BrowserRouter>
   )

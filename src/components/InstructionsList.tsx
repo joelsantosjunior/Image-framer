@@ -1,6 +1,6 @@
 const InstructionsList = () => {
   return (
-    <div className="self-start ml-3">
+    <div className="self-start ml-3 mb-6">
       <ol className="list-decimal text-sm font-medium">
         <li>Escolha uma imagem</li>
         <li>Selecione uma moldura</li>

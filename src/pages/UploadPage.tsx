@@ -55,7 +55,7 @@ const UploadPage = () => {
           width: 'min(100%, 400px)',
         }}
         onClick={handleFileUploadClick}
-        className="relative file-uploader flex flex-col items-center justify-center border border-solid border-gray-400 rounded-lg hover:border-gray-500 transition active:border-gray-600 cursor-pointer p-4 shadow-md mb-20"
+        className="relative file-uploader flex flex-col items-center justify-center border border-solid border-gray-400 rounded-lg hover:border-gray-500 transition active:border-gray-600 cursor-pointer p-4 shadow-md mb-8"
       >
         <div className="absolute w-full h-full file-uploader-bg bg-gradient-to-br from-blue-400 to-blue-200 bg-opacity-30 opacity-50"></div>
 
