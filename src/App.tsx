@@ -28,7 +28,6 @@ const frames = [
 function App() {
   const [image, setImage] = useState<File | null>(null)
   const [selectedFrame, setSelectedFrame] = useState<string | null>(null)
-  const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [ratio, setRatio] = useState<number>(AspectRatio.STORY)
   const cropperRef = useRef<ReactCropperElement>(null)
 
@@ -45,8 +44,6 @@ function App() {
       const croppedImage = cropper?.getCroppedCanvas().toDataURL('image/jpeg')
 
       if (croppedImage && selectedFrame) {
-        setCroppedImage(croppedImage)
-
         const frame = await loadImage(selectedFrame)
         const image = await loadImage(croppedImage)
 
@@ -122,9 +119,6 @@ function App() {
           aspectRatio={ratio}
           image={image}
           ref={cropperRef}
-          onCrop={(image) => {
-            setCroppedImage(image)
-          }}
         ></ImageCropper>
 
         {image && (

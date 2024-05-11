@@ -5,7 +5,6 @@ import { Cropper } from 'react-cropper'
 interface ImageCropperProps {
   aspectRatio: number
   image: File | null
-  onCrop: (croppedImage: string) => void
 }
 
 const ImageCropper = (props: ImageCropperProps, ref: any) => {
