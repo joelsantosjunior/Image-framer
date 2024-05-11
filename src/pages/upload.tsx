@@ -3,7 +3,7 @@ import { useRef } from 'react'
 const UploadPage = () => {
   const ref = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {}
+  const handleFileChange = () => {}
 
   const handleFileUploadClick = () => {
     ref.current?.click()
