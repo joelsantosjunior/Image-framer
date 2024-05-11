@@ -51,7 +51,7 @@ const UploadPage = () => {
       </div>
 
       <div className="self-start ml-3">
-        <ol className="list-style-auto list-outside text-sm font-medium">
+        <ol className="list-decimal text-sm font-medium">
           <li>Escolha uma imagem</li>
           <li>Selecione uma moldura</li>
           <li>Se necessário, corte a imagem</li>
