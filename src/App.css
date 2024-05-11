@@ -23,17 +23,18 @@
   }
 
   .page {
+    background-image: url('./assets/background.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: overlay;
+  }
+
+  .page {
     @apply flex flex-col items-center justify-start;
     @apply min-h-screen;
     @apply min-w-full;
     @apply bg-gray-50;
-  }
-
-  .page.uploader {
-    background-image: url('./assets/background.jpg');
-    background-position: center;
-    background-size: cover;
-    background-blend-mode: overlay;
+    @apply px-12;
   }
 
   .page > h1 {

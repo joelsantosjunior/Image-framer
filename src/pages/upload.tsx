@@ -1,16 +1,44 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
+import InstructionsList from '../components/InstructionsList'
+import { ImageContext } from '../ImageContext'
+import { useNavigate } from 'react-router-dom'
 
 const UploadPage = () => {
   const ref = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = () => {}
+  const [imageContext, setImageContext] = useContext(ImageContext)
+
+  const navigate = useNavigate()
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+
+    if (file) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        const result = e.target?.result
+
+        if (typeof result === 'string') {
+          setImageContext({
+            ...imageContext,
+            imageSrc: result,
+          })
+
+          navigate('/view')
+        }
+      }
+
+      reader.readAsDataURL(file)
+    }
+  }
 
   const handleFileUploadClick = () => {
     ref.current?.click()
   }
 
   return (
-    <div className="page uploader px-12">
+    <div className="page uploader">
       <h1 className="mb-14 mt-14">Upload your picture</h1>
 
       <input
@@ -50,15 +78,7 @@ const UploadPage = () => {
         </div>
       </div>
 
-      <div className="self-start ml-3">
-        <ol className="list-decimal text-sm font-medium">
-          <li>Escolha uma imagem</li>
-          <li>Selecione uma moldura</li>
-          <li>Se necessário, corte a imagem</li>
-          <li>Visualize o resultado</li>
-          <li>Faça download da nova imagem no formato escolhido</li>
-        </ol>
-      </div>
+      <InstructionsList></InstructionsList>
     </div>
   )
 }
