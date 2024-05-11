@@ -4,12 +4,13 @@ import UploadPage from './pages/UploadPage'
 import ImageView from './pages/ImageViewPage'
 import { ImageContext } from './ImageContext'
 import { useState } from 'react'
+import FrameSelectionPage from './pages/FrameSelectionPage'
 
 function App() {
   const value = {
     imageSrc: '',
     frame: '',
-    result: '',
+    result: null,
   }
 
   const imageState = useState<ImageContext>(value)
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<UploadPage />}></Route>
           <Route path="/view" element={<ImageView />}></Route>
-          <Route path="/frame"></Route>
+          <Route path="/frame" element={<FrameSelectionPage />}></Route>
           <Route path="/download"></Route>
         </Routes>
       </ImageContext.Provider>

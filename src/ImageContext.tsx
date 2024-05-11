@@ -3,7 +3,7 @@ import { createContext } from 'react'
 export interface ImageContext {
   imageSrc: string
   frame: string
-  result: string
+  result: string | null
 }
 
 export const ImageContext = createContext<
@@ -12,7 +12,7 @@ export const ImageContext = createContext<
   {
     imageSrc: '',
     frame: '',
-    result: '',
+    result: null,
   },
   () => {},
 ])
