@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react'
 import './App.css'
-import Footer from './components/Footer'
-import { AspectRatio } from './utils/aspect-ratios'
-import ImageCropper from './components/ImageCropper'
+import Footer from './Footer'
+import { AspectRatio } from '../utils/aspect-ratios'
+import ImageCropper from './ImageCropper'
 import { ReactCropperElement } from 'react-cropper'
-import { blendTwoImages } from './utils/blend-images-canvas'
-import { loadImage } from './utils/load-image'
+import { blendTwoImages } from '../utils/blend-images-canvas'
+import { loadImage } from '../utils/load-image'
 
 const frames = [
   {

@@ -21,9 +21,21 @@ function App() {
       <ImageContext.Provider value={imageState}>
         <header className="header h-8">
           <div className="home-button absolute">
-            <button className="px-2 py-2 color-white bg-blue-400 m-4 rounded">
-              <Link className="text-white" to={'/'}>
-                Página Inicial
+            <button className="px-4 py-2 shadow-md color-white bg-primary-blue-100 font-display m-4 rounded">
+              <Link className="text-white flex flex-row gap-2" to={'/'}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"
+                    fill="white"
+                  />
+                </svg>
+                <span>Página Inicial</span>{' '}
               </Link>
             </button>
           </div>
