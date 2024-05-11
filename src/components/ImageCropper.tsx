@@ -1,6 +1,6 @@
-import "cropperjs/dist/cropper.css"
-import { useEffect, useRef } from "react"
-import { Cropper, ReactCropperElement } from "react-cropper"
+import 'cropperjs/dist/cropper.css'
+import { ReactElement, forwardRef, useMemo, useState } from 'react'
+import { Cropper } from 'react-cropper'
 
 interface ImageCropperProps {
   aspectRatio: number
@@ -8,26 +8,31 @@ interface ImageCropperProps {
   onCrop: (croppedImage: string) => void
 }
 
-const ImageCropper = ({ aspectRatio, image }: ImageCropperProps) => {
-  const cropperRef = useRef<ReactCropperElement>(null)
+const ImageCropper = (props: ImageCropperProps, ref: any) => {
+  const { image, aspectRatio } = props
 
-  const onCrop = () => {}
+  const [cropper, setCropper] = useState<ReactElement | null>(null)
 
-  useEffect(() => {
-    const cropper = cropperRef.current?.cropper
-    cropper?.setAspectRatio(aspectRatio ?? 1 / 1)
-  }, [aspectRatio])
+  useMemo(() => {
+    const cropper = (
+      <Cropper
+        src={image ? URL.createObjectURL(image) : ''}
+        style={{ height: '456px', width: '100%' }}
+        initialAspectRatio={aspectRatio ?? 1 / 1}
+        guides={true}
+        onDragEnd={() => {
+          console.log('onDragEnd')
+        }}
+        ref={ref}
+      />
+    )
 
-  return (
-    <Cropper
-      src={image ? URL.createObjectURL(image) : ""}
-      style={{ height: 400, width: "100%" }}
-      initialAspectRatio={aspectRatio ?? 1 / 1}
-      guides={true}
-      crop={onCrop}
-      ref={cropperRef}
-    />
-  )
+    ref.current?.cropper?.setAspectRatio(aspectRatio ?? 1 / 1)
+
+    setCropper(cropper)
+  }, [image, aspectRatio])
+
+  return cropper
 }
 
-export default ImageCropper
+export default forwardRef(ImageCropper)

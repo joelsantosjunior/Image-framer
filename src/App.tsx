@@ -1,13 +1,36 @@
-import { useState } from "react"
-import "./App.css"
-import Footer from "./components/Footer"
-import { AspectRatio } from "./utils/aspect-ratios"
-import ImageCropper from "./components/ImageCropper"
-// import { ImageSizes } from "./utils/image-sizes"
+import { useRef, useState } from 'react'
+import './App.css'
+import Footer from './components/Footer'
+import { AspectRatio } from './utils/aspect-ratios'
+import ImageCropper from './components/ImageCropper'
+import { ReactCropperElement } from 'react-cropper'
+import { blendTwoImages } from './utils/blend-images-canvas'
+import { loadImage } from './utils/load-image'
+
+const frames = [
+  {
+    src: './src/assets/frames/small.png',
+  },
+  {
+    src: './src/assets/frames/moldura instagram.png',
+  },
+  {
+    src: './src/assets/frames/medium.png',
+  },
+  {
+    src: './src/assets/frames/big.png',
+  },
+  {
+    src: './src/assets/frames/story.png',
+  },
+]
 
 function App() {
   const [image, setImage] = useState<File | null>(null)
+  const [selectedFrame, setSelectedFrame] = useState<string | null>(null)
+  const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [ratio, setRatio] = useState<number>(AspectRatio.STORY)
+  const cropperRef = useRef<ReactCropperElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -16,11 +39,33 @@ function App() {
     }
   }
 
+  const handleClickDownload = async () => {
+    if (cropperRef) {
+      const cropper = cropperRef.current?.cropper
+      const croppedImage = cropper?.getCroppedCanvas().toDataURL('image/jpeg')
+
+      if (croppedImage && selectedFrame) {
+        setCroppedImage(croppedImage)
+
+        const frame = await loadImage(selectedFrame)
+        const image = await loadImage(croppedImage)
+
+        const blendedImages = blendTwoImages(image, frame, 0, 0)
+
+        const link = document.createElement('a')
+
+        link.href = blendedImages!
+        link.download = 'image.jpg'
+        link.click()
+      }
+    }
+  }
+
   return (
     <>
       <div
         style={{
-          maxWidth: "500px",
+          maxWidth: '500px',
         }}
         className="flex flex-col items-start p-5 md:container md:mx-auto"
       >
@@ -52,62 +97,46 @@ function App() {
           />
         </div>
 
-        <ImageCropper aspectRatio={ratio} image={image}></ImageCropper>
-
-        {/* <div
-          style={{
-            width: "min(100%, 456px)",
-            height: "456px",
-            position: "relative",
-          }}
-          className="image-container flex border-spacing-1 items-center justify-center border-2 border-dashed border-blue-500"
-        >
-          <div
-            className="image flex items-center justify-center"
-            style={{
-              maxHeight: "100%",
-              aspectRatio: ratio,
-              position: "absolute",
-              zIndex: 1,
-            }}
-          >
-            <img
+        <div className="framer-selection flex flex-row gap-3 mb-3">
+          {frames.map(({ src }) => (
+            <div
+              onClick={() => setSelectedFrame(src)}
               style={{
-                maxHeight: "100%",
-                maxWidth: "100%",
+                height: '80px',
+                width: '80px',
               }}
-              src={`https://via.placeholder.com/${ImageSizes[ratio]}`}
-              alt="Imagem"
-              className="object-cover"
-            />
-          </div>
-
-          <div
-            style={{
-              zIndex: 2,
-            }}
-          >
-            {image && (
+              className="shadow-md flex flex-col items-center bg-white border rounded-md border-black hover:cursor-pointer transition active:scale-90"
+            >
               <img
                 style={{
-                  maxHeight: "100%",
-                  maxWidth: "100%",
+                  maxHeight: '80px',
                 }}
-                src={URL.createObjectURL(image)}
-                alt="Imagem"
-                className="object-cover"
+                src={src}
+                alt="frame"
               />
-            )}
-          </div>
-        </div> */}
+            </div>
+          ))}
+        </div>
+
+        <ImageCropper
+          aspectRatio={ratio}
+          image={image}
+          ref={cropperRef}
+          onCrop={(image) => {
+            setCroppedImage(image)
+          }}
+        ></ImageCropper>
 
         {image && (
           <div className="buttons mt-10 flex gap-2">
             <button className="rounded-md bg-blue-500 px-6 py-2 text-lg text-white transition hover:shadow-md active:bg-blue-600">
-              crop
+              preview
             </button>
 
-            <button className="text-l rounded-md bg-blue-500 px-6 py-2 text-lg text-white transition hover:shadow-md active:bg-blue-600">
+            <button
+              onClick={handleClickDownload}
+              className="text-l rounded-md bg-blue-500 px-6 py-2 text-lg text-white transition hover:shadow-md active:bg-blue-600"
+            >
               download
             </button>
 
@@ -122,10 +151,8 @@ function App() {
           </div>
         )}
 
-        <div className=""></div>
-
         <Footer>
-          Feito com ❤️ + ☕️ por{" "}
+          Feito com 💚 + 🍕 por{' '}
           <a href="https://joelsantos.dev" target="_blank">
             Joel Santos
           </a>
