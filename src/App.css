@@ -32,9 +32,11 @@
   .page {
     @apply flex flex-col items-center justify-start;
     @apply min-h-screen;
-    @apply min-w-full;
     @apply bg-gray-50;
     @apply px-10;
+
+    max-width: min(600px, 100%);
+    margin: auto;
   }
 
   .page > h1 {
