@@ -2,9 +2,6 @@ import { ImageContext } from '../ImageContext'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import '../assets/frames/dia-das-maes.png'
-import '../assets/frames/festa-junina.png'
-
 interface Frame {
   src: string
   name: string
