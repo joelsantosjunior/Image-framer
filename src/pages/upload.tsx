@@ -2,11 +2,16 @@ import { useRef } from 'react'
 
 const UploadPage = () => {
   const ref = useRef<HTMLInputElement>(null)
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {}
+
+  const handleFileUploadClick = () => {
+    ref.current?.click()
+  }
 
   return (
     <div className="page uploader px-12">
-      <h1 className="mb-20 mt-10">Upload your picture</h1>
+      <h1 className="mb-14 mt-14">Upload your picture</h1>
 
       <input
         type="file"
@@ -21,6 +26,7 @@ const UploadPage = () => {
           height: '300px',
           width: 'min(100%, 400px)',
         }}
+        onClick={handleFileUploadClick}
         className="relative file-uploader flex flex-col items-center justify-center border border-solid border-gray-400 rounded-lg hover:border-gray-500 transition active:border-gray-600 cursor-pointer p-4 shadow-md mb-20"
       >
         <div className="absolute w-full h-full file-uploader-bg bg-gradient-to-br from-blue-400 to-blue-200 bg-opacity-30 opacity-50"></div>
