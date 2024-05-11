@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import { Route, BrowserRouter, Routes, Link } from 'react-router-dom'
 import UploadPage from './pages/UploadPage'
 import ImageView from './pages/ImageViewPage'
 import { ImageContext } from './ImageContext'
@@ -18,6 +18,15 @@ function App() {
   return (
     <BrowserRouter>
       <ImageContext.Provider value={imageState}>
+        <header className="header h-8">
+          <div className="home-button absolute">
+            <button className="px-2 py-2 color-white bg-blue-400 m-4 rounded">
+              <Link className="text-white" to={'/'}>
+                Página Inicial
+              </Link>
+            </button>
+          </div>
+        </header>
         <Routes>
           <Route path="/" element={<UploadPage />}></Route>
           <Route path="/view" element={<ImageView />}></Route>
