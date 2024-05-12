@@ -21,9 +21,19 @@ function App() {
       <ImageContext.Provider value={imageState}>
         <header className="header h-8">
           <div className="home-button absolute">
-            <button className="px-4 py-2 shadow-md color-white bg-primary-blue-100 font-display m-4 rounded">
+            <button
+              style={{
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+              }}
+              className="transition px-4 py-2 shadow-md color-white bg-primary-blue-100 font-display m-4 active:scale-75"
+            >
               <Link className="text-white flex flex-row gap-2" to={'/'}>
                 <svg
+                  style={{
+                    scale: '2.5',
+                  }}
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -35,7 +45,6 @@ function App() {
                     fill="white"
                   />
                 </svg>
-                <span>Página Inicial</span>{' '}
               </Link>
             </button>
           </div>
