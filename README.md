@@ -10,8 +10,8 @@ The web application offers a straightforward solution: users can upload their im
 - TypeScript
 - Vite
 - TailwindCSS
-- React Crop Image
-- Firebase
+- React Crop Image (WIP)
+- Firebase (WIP)
 
 ## Template
 
