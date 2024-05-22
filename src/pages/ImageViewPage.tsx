@@ -39,7 +39,7 @@ const ImageView = () => {
 
   return (
     <div className="page">
-      <h1 className="mb-14 mt-14">Select a frame to apply</h1>
+      <h1 className="mb-14 mt-14">Escolha uma moldura</h1>
       {isLoading ? (
         <div
           style={{
