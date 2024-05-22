@@ -24,7 +24,6 @@
 
   .page {
     @apply flex flex-col items-center justify-start;
-    @apply bg-gray-50;
     @apply px-10;
 
     min-height: calc(100vh - 100px);

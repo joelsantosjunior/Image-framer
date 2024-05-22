@@ -29,7 +29,7 @@ const UploadPage = () => {
 
   return (
     <div className="page uploader">
-      <h1 className="mb-14 mt-14">Upload your picture</h1>
+      <h1 className="mb-14 mt-14">Envie sua imagem</h1>
 
       <input type="file" hidden ref={ref} {...inputProps} accept="image/*" />
 
@@ -56,9 +56,7 @@ const UploadPage = () => {
               fill="black"
             />
           </svg>
-          <span className="text-sm font-medium">
-            browse your phone files<br></br>or drag an image
-          </span>
+          <span className="text-sm font-medium">browse your phone files</span>
         </div>
       </div>
 
