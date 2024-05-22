@@ -1,32 +1,17 @@
 import { ImageContext } from '../ImageContext'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-interface Frame {
-  src: string
-  name: string
-  dimensions?: string
-  ratio?: string
-  bg?: string
-}
+import PrimaryButton from '../components/PrimaryButton'
+import { useFile } from '../hooks/useFile'
+import useStorageFrames from '../hooks/useStorageFrames'
 
 const FrameSelectionPage = () => {
-  const frames: Frame[] = [
-    {
-      src: 'assets/frames/festa-junina.png',
-      name: 'Festa Junina',
-      bg: 'bg-gray-500',
-    },
-    {
-      src: 'assets/frames/dia-das-maes.png',
-      name: 'Dia das Mães',
-      bg: 'bg-gray-500',
-    },
-  ]
-
   const [imageContext, setImageContext] = useContext(ImageContext)
   const [_, setMoldura] = useState('')
   const navigate = useNavigate()
+  const ref = useRef<HTMLInputElement>(null)
+  const [file, inputProps] = useFile()
+  const [frames, setFrames] = useStorageFrames()
 
   const handleSelectMolduras = (frameSrc: string) => {
     setMoldura(frameSrc)
@@ -38,25 +23,52 @@ const FrameSelectionPage = () => {
     navigate('/view')
   }
 
+  useEffect(() => {
+    if (file) {
+      setFrames([
+        ...frames,
+        {
+          src: file,
+          name: 'Custom',
+        },
+      ])
+    }
+  }, [file])
+
   return (
     <div className="page">
       <h1 className="mb-14 mt-14">Molduras</h1>
+
+      <input type="file" accept="image/*" hidden ref={ref} {...inputProps} />
 
       <div
         style={{
           maxWidth: 'min(100%, 400px)',
         }}
-        className="frames grid grid-cols-3 gap-2"
+        className="frames grid grid-cols-3 gap-2 mb-4"
       >
         {frames.map((frame) => (
           <div
             key={frame.name}
             onClick={() => handleSelectMolduras(frame.src)}
-            className={`frame-slot ${frame.bg} h-32 shadow-md border-2 border-dashed border-blue-100`}
+            style={{
+              backgroundColor: 'rgb(101 145 233)',
+            }}
+            className="frame-slot h-32 shadow-md border-2 border-dashed border-blue-100 flex justify-center items-center cursor-pointer"
           >
             <img src={frame.src} />
           </div>
         ))}
+      </div>
+
+      <div className="mt-auto w-full mb-4">
+        <PrimaryButton
+          onClick={() => {
+            ref.current?.click()
+          }}
+        >
+          <span>Upload</span>
+        </PrimaryButton>
       </div>
     </div>
   )
