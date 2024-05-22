@@ -54,13 +54,22 @@ const FrameSelectionPage = () => {
             style={{
               backgroundColor: 'rgb(101 145 233)',
             }}
-            className="frame-slot h-32 shadow-md border-2 border-dashed border-blue-100 flex justify-center items-center cursor-pointer"
+            className="relative h-32 shadow-md border-2 border-dashed border-blue-100 flex justify-center items-center cursor-pointer"
           >
             <img src={frame.src} />
+            <div
+              className="absolute top-1 right-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation()
+                setFrames(frames.filter((f) => f.src !== frame.src))
+              }}
+            >
+              <span>❌</span>
+            </div>
           </div>
         ))}
       </div>
-
+      {/* 🗑️ */}
       <div className="mt-auto w-full mb-4">
         <PrimaryButton
           onClick={() => {

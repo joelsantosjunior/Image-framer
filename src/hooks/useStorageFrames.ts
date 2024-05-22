@@ -26,6 +26,10 @@ const useStorageFrames = (): [Frame[], (frames: Frame[]) => void] => {
     const savedFrames = localStorage.getItem('frames')
     if (savedFrames) {
       const parsedFrames = JSON.parse(savedFrames)
+      if (!parsedFrames.length) {
+        set(initialFrames)
+        return
+      }
       set(parsedFrames)
     } else {
       updateFrames(initialFrames)
