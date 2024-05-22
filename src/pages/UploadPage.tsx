@@ -1,7 +1,8 @@
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import InstructionsList from '../components/InstructionsList'
 import { ImageContext } from '../ImageContext'
 import { useNavigate } from 'react-router-dom'
+import { useFile } from '../hooks/useFile'
 
 const UploadPage = () => {
   const ref = useRef<HTMLInputElement>(null)
@@ -9,29 +10,18 @@ const UploadPage = () => {
   const [imageContext, setImageContext] = useContext(ImageContext)
 
   const navigate = useNavigate()
+  const [file, inputProps] = useFile()
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-
+  useEffect(() => {
     if (file) {
-      const reader = new FileReader()
+      setImageContext({
+        ...imageContext,
+        imageSrc: file,
+      })
 
-      reader.onload = (e) => {
-        const result = e.target?.result
-
-        if (typeof result === 'string') {
-          setImageContext({
-            ...imageContext,
-            imageSrc: result,
-          })
-
-          navigate('/view')
-        }
-      }
-
-      reader.readAsDataURL(file)
+      navigate('/view')
     }
-  }
+  }, [file])
 
   const handleFileUploadClick = () => {
     ref.current?.click()
@@ -41,13 +31,7 @@ const UploadPage = () => {
     <div className="page uploader">
       <h1 className="mb-14 mt-14">Upload your picture</h1>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleFileChange}
-        hidden
-        ref={ref}
-      />
+      <input type="file" hidden ref={ref} {...inputProps} accept="image/*" />
 
       <div
         style={{

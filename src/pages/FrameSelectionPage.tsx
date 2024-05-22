@@ -39,7 +39,7 @@ const FrameSelectionPage = () => {
     <div className="page">
       <h1 className="mb-14 mt-14">Molduras</h1>
 
-      <input type="file" accept="image/*" hidden ref={ref} {...inputProps} />
+      <input type="file" hidden ref={ref} {...inputProps} accept="image/png" />
 
       <div
         style={{

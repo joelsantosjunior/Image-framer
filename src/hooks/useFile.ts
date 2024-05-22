@@ -1,7 +1,9 @@
 import { useState } from 'react'
 export const useFile = (): [
   string | null,
-  { onChange: (e: React.ChangeEvent<HTMLInputElement>) => void },
+  {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  },
 ] => {
   const [file, setFile] = useState<string | null>(null)
 
